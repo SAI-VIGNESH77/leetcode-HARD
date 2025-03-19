@@ -1,0 +1,68 @@
+# My first LEET CODE Hard QUESTION 
+class Solution {
+public:
+    bool issafe(int row ,int col , vector<string>& ans,int n){
+
+        int x = row ;
+        int y = col ;
+        while(y>=0){
+            if(ans[x][y]=='Q'){
+                return false;
+            }
+            y--;
+
+        }
+        x = row ;
+        y = col ;
+        while( x >= 0 && y >= 0){
+            if(ans[x][y]=='Q'){
+                return false;
+            }
+            y--;
+            x--;
+
+        }
+        x = row ;
+        y = col ;
+         while( x < n && y >= 0){
+            if(ans[x][y]=='Q'){
+                return false;
+            }
+            y--;
+            x++;
+
+        }
+        return true;
+    }
+    void solve(int col ,vector<string>& ans,vector<vector<string>>& output,int n ){
+        if(col == n){
+            output.push_back(ans);
+            return;
+        }
+        for(int row =0 ;row<n;row++){
+            if(issafe(row,col,ans,n)){
+                ans[row][col]= 'Q';
+                solve(col+1,ans,output,n);
+                ans[row][col]= '.';
+            }
+
+        }
+
+    }
+    vector<vector<string>> solveNQueens(int n) {
+      
+
+        vector<vector<string>> output;
+        vector<string> ans(n,string(n,'.'));
+
+
+        solve(0,ans,output,n);
+
+
+
+
+        return output;
+        
+    }
+};
+```
